@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="520.0" style="-fx-background-color: #664db3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.first_project.StartController">
+   <children>
+      <Button fx:id="start" graphicTextGap="9.0" layoutX="234.0" layoutY="266.0" mnemonicParsing="false" onAction="#startGame" prefHeight="63.0" prefWidth="160.0" text="Start" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <effect>
+            <DropShadow height="50.31" radius="23.9225" width="47.38">
+               <color>
+                  <Color red="0.10526315867900848" green="0.10526315867900848" blue="0.10526315867900848" />
+               </color>
+               <input>
+                  <Glow level="0.03" />
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Label alignment="CENTER" layoutX="246.0" layoutY="63.0" prefHeight="57.0" prefWidth="320.0" text="Tic Tac Toe" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+         <font>
+            <Font name="UD Digi Kyokasho N-R" size="56.0" />
+         </font>
+         <effect>
+            <InnerShadow>
+               <input>
+                  <DropShadow>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </DropShadow>
+               </input>
+            </InnerShadow>
+         </effect>
+      </Label>
+   </children>
+</AnchorPane>
