@@ -1,7 +1,7 @@
 package com.first_project;
 
-import com.first_project.gameFunctions.Computer;
-import com.first_project.gameFunctions.WinCheck;
+import com.first_project.game_functions.Computer;
+import com.first_project.game_functions.WinCheck;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,63 +16,55 @@ import java.io.IOException;
 import java.util.*;
 
 public class GameController {
-    private Parent root;
-    private Stage stage;
-    private Scene scene;
-    String playerSymbol;
-    String computerSymbol;
-    boolean playerTurn;
-    WinCheck winCheck = new WinCheck();
-    Computer computer = new Computer();
-    Random random = new Random();
-
-    //Reset button and information screen
-    @FXML
-    Label infoScreen;
-    @FXML
-    Button reset;
-    //Symbol buttons
-    @FXML
-    Button chooseX;
-    @FXML
-    Button chooseO;
-
-    //Game buttons
-    @FXML
-    Button one;
-    @FXML
-    Button two;
-    @FXML
-    Button three;
-    @FXML
-    Button four;
-    @FXML
-    Button five;
-    @FXML
-    Button six;
-    @FXML
-    Button seven;
-    @FXML
-    Button eight;
-    @FXML
-    Button nine;
+    private String playerSymbol;
+    private String computerSymbol;
+    private boolean playerTurn;
+    private WinCheck winCheck = new WinCheck();
+    private Computer computer = new Computer();
+    private Random random = new Random();
 
 
+    @FXML
+    private Label infoScreen;
+    @FXML
+    private Button reset;
+    @FXML
+    private Button chooseX;
+    @FXML
+    private Button chooseO;
+    @FXML
+    private Button one;
+    @FXML
+    private Button two;
+    @FXML
+    private Button three;
+    @FXML
+    private Button four;
+    @FXML
+    private Button five;
+    @FXML
+    private Button six;
+    @FXML
+    private Button seven;
+    @FXML
+    private Button eight;
+    @FXML
+    private Button nine;
 
-    //Mechaniki gry
-    //Mechanika resetu
+    private List<Button> getButtons() {
+        return new ArrayList<>(Arrays.asList(one, two, three, four, five, six, seven, eight, nine));
+    }
     @FXML
     public void resetGame(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("gameScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("gameScreen.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    //Mechanika wyboru 2 metody
     public void playerPlaysX() {
-        List<Button> gameButtons = new ArrayList<>(Arrays.asList(one, two, three, four, five, six, seven, eight, nine));
+        List<Button> gameButtons = getButtons();
         chooseX.setOnMouseClicked(mouseEvent -> {
             playerSymbol = "X";
             computerSymbol = "O";
@@ -82,12 +74,11 @@ public class GameController {
             chooseX.setVisible(false);
             gameButtons.forEach(button -> button.setDisable(false));
             startSymbol();
-
         });
     }
 
     public void playerPlaysO() {
-        List<Button> gameButtons = new ArrayList<>(Arrays.asList(one, two, three, four, five, six, seven, eight, nine));
+        List<Button> gameButtons = getButtons();
         chooseO.setOnMouseClicked(mouseEvent -> {
             playerSymbol = "O";
             computerSymbol = "X";
@@ -99,7 +90,6 @@ public class GameController {
             startSymbol();
         });
     }
-
 
     public void startSymbol() {
         if (random.nextInt(2) == 1) {
@@ -113,7 +103,7 @@ public class GameController {
     }
 
     public void game() {
-        List<Button> gameButtons = new ArrayList<>(Arrays.asList(one, two, three, four, five, six, seven, eight, nine));
+        List<Button> gameButtons = getButtons();
         gameButtons.forEach(button -> {
             if (playerTurn) {
                 if ("".equals(button.getText())) {
@@ -122,9 +112,13 @@ public class GameController {
                         button.setDisable(true);
                         playerTurn = false;
                         infoScreen.setText("Tic tac toe");
+                        if(winCheck.winChecker(playerSymbol, gameButtons, infoScreen)){
+                            return;
+                        }
                         computer.computerMove(gameButtons,computerSymbol);
-                        winCheck.winChecker(playerSymbol, gameButtons, infoScreen);
-                        winCheck.winChecker(computerSymbol, gameButtons, infoScreen);
+                        if(winCheck.winChecker(computerSymbol, gameButtons, infoScreen)){
+                            return;
+                        }
                         playerTurn = true;
                     });
                 }
@@ -132,8 +126,12 @@ public class GameController {
                 computer.computerMove(gameButtons,computerSymbol);
                 playerTurn = true;
                 infoScreen.setText("Tic tac toe");
-                winCheck.winChecker(playerSymbol, gameButtons, infoScreen);
-                winCheck.winChecker(computerSymbol, gameButtons, infoScreen);
+                if(winCheck.winChecker(playerSymbol, gameButtons, infoScreen)){
+                    return;
+                }
+                if(winCheck.winChecker(computerSymbol, gameButtons, infoScreen)){
+                    return;
+                }
             }
         });
     }

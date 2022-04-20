@@ -1,16 +1,18 @@
-package com.first_project.gameFunctions;
+package com.first_project.game_functions;
 
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 
 import java.util.List;
+import java.util.Random;
 
 public class Computer {
 
+    Random random = new Random();
 
     public void computerMove(List<Button> buttons, String symbol) {
-        for (Button button : buttons){
-            if ("".equals(button.getText())){
+        while (true) {
+            Button button = buttons.get(random.nextInt(buttons.size()));
+            if ("".equals(button.getText())) {
                 button.setText(symbol);
                 button.setDisable(true);
                 break;

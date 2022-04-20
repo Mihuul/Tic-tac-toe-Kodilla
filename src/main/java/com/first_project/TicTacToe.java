@@ -7,13 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
-public class Tic_tac_toe extends Application {
+public class TicTacToe extends Application {
     Image logo = new Image("logo.png");
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("startScreen.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startScreen.fxml")));
         Scene scene = new Scene(root);
         stage.setTitle("Tic Tac Toe");
         stage.setResizable(false);

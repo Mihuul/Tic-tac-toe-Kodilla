@@ -1,6 +1,7 @@
 package com.first_project;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,14 +14,14 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class StartController {
-    Image logo = new Image("logo.png");
+    private final Image logo = new Image("logo.png");
 
     @FXML
-    Button start;
+    private Button start;
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("gameScreen.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("gameScreen.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setResizable(false);

@@ -5,6 +5,6 @@ module com.example.first_project {
 
     opens com.first_project to javafx.fxml;
     exports com.first_project;
-    exports com.first_project.gameFunctions;
-    opens com.first_project.gameFunctions to javafx.fxml;
+    exports com.first_project.game_functions;
+    opens com.first_project.game_functions to javafx.fxml;
 }
